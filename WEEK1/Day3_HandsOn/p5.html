@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+}
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    width: 200px;
+}
+.main {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.card {
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px;
+    flex: 1 1 30%;
+}
+@media (max-width: 768px) {
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .card {
+        flex: 1 1 100%;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="dashboard">
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <p>Dashboard</p>
+        <p>Reports</p>
+        <p>Settings</p>
+    </div>
+
+    <div class="main">
+        <div class="card">Card 1</div>
+        <div class="card">Card 2</div>
+        <div class="card">Card 3</div>
+    </div>
+
+</div>
+</body>
+</html>

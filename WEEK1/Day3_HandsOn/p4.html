@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Responsive Blog</title>
+<style>
+
+body {
+    font-family: Arial;
+    margin: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.card {
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 10px;
+    flex: 1 1 30%;
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+.card button {
+    padding: 8px;
+}
+
+@media (max-width: 768px) {
+    .card {
+        flex: 1 1 100%;
+    }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>My Blog</h1>
+</header>
+
+<div class="container">
+    <div class="card">
+        <h3>Blog Title 1</h3>
+        <p>Short description about blog post.</p>
+        <button>Read More</button>
+    </div>
+<div class="card">
+        <h3>Blog Title 2</h3>
+        <p>Short description about blog post.</p>
+        <button>Read More</button>
+    </div>
+
+    <div class="card">
+        <h3>Blog Title 3</h3>
+        <p>Short description about blog post.</p>
+        <button>Read More</button>
+    </div>
+</div>
+</body>
+</html>
