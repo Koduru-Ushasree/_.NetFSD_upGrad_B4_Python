@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker - IndexedDB</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        input {
+            padding: 5px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 6px 12px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 60%;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Mini Expense Tracker (IndexedDB)</h2>
+
+<input type="text" id="title" placeholder="Expense Title">
+<input type="number" id="amount" placeholder="Amount">
+<input type="date" id="date">
+
+<br>
+
+<button onclick="addExpense()">Add Expense</button>
+<button onclick="viewExpenses()">View Expenses</button>
+<button onclick="deleteExpense()">Delete Expense</button>
+
+<p id="message"></p>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Amount</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody id="expenseList"></tbody>
+</table>
+
+<script>
+
+let db;
+
+// Open (or create) Database
+let request = indexedDB.open("ExpenseDB", 1);
+
+// Runs if database is created or version changes
+request.onupgradeneeded = function(event) {
+
+    db = event.target.result;
+
+    // Create object store (like table)
+    db.createObjectStore("expenses", {
+        keyPath: "id",
+        autoIncrement: true
+    });
+};
+
+// Runs when database opens successfully
+request.onsuccess = function(event) {
+    db = event.target.result;
+    viewExpenses(); // Load data automatically
+};
+
+// Error opening DB
+request.onerror = function() {
+    console.log("Database failed to open");
+};
+
+
+//  Add Expense
+function addExpense() {
+
+    let title = document.getElementById("title").value;
+    let amount = document.getElementById("amount").value;
+    let date = document.getElementById("date").value;
+
+    if (title === "" || amount === "" || date === "") {
+        document.getElementById("message").innerHTML = "All fields required!";
+        return;
+    }
+
+    // Start transaction
+    let transaction = db.transaction(["expenses"], "readwrite");
+
+    let store = transaction.objectStore("expenses");
+
+    let expense = {
+        title: title,
+        amount: amount,
+        date: date
+    };
+
+    store.add(expense);
+
+    transaction.oncomplete = function() {
+        document.getElementById("message").innerHTML = "Expense Added!";
+        viewExpenses();
+    };
+
+    transaction.onerror = function() {
+        document.getElementById("message").innerHTML = "Transaction Failed!";
+    };
+}
+// View Expenses
+function viewExpenses() {
+
+    let transaction = db.transaction(["expenses"], "readonly");
+
+    let store = transaction.objectStore("expenses");
+
+    let request = store.getAll();
+
+    request.onsuccess = function() {
+
+        let expenses = request.result;
+        let output = "";
+
+        expenses.forEach(function(item) {
+
+            output += "<tr>" +
+                "<td>" + item.id + "</td>" +
+                "<td>" + item.title + "</td>" +
+                "<td>" + item.amount + "</td>" +
+                "<td>" + item.date + "</td>" +
+                "</tr>";
+        });
+
+        document.getElementById("expenseList").innerHTML = output;
+    };
+}
+
+
+//  Delete Expense
+function deleteExpense() {
+
+    let id = prompt("Enter Expense ID to delete:");
+    if (!id) return;
+    let transaction = db.transaction(["expenses"], "readwrite");
+    let store = transaction.objectStore("expenses");
+    store.delete(Number(id));
+    transaction.oncomplete = function() {
+        document.getElementById("message").innerHTML = "Expense Deleted!";
+        viewExpenses();
+    };
+     transaction.onerror = function() {
+        document.getElementById("message").innerHTML = "Delete Failed!";
+    };
+}
+</script>
+</body>
+</html>

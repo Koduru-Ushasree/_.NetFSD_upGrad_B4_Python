@@ -1,0 +1,80 @@
+<!-- Problem 1: Personal Notes Saver using LocalStorage (Level-1)
+Scenario
+You are building a simple web page where users can write daily notes and save them in their browser without using a server.
+📌 Requirements
+•	A textarea for writing notes.
+•	A Save button (using onclick).
+•	A Clear button.
+•	Notes must:
+Be stored in localStorage
+Automatically load when the page refreshes
+•	Display stored note on page load.
+
+🛠️ Technical Constraints
+•	Must use:
+o	onclick inline event
+o	localStorage.setItem()
+o	localStorage.getItem()
+o	localStorage.removeItem()
+•	No backend/database.
+•	Pure HTML + JavaScript only.
+•	Data stored as key-value pair.
+
+🎯 Learning Outcome
+You should be able to:
+•	Inline event handling (onclick)
+•	Browser Storage APIs
+•	Storing & retrieving key-value data
+•	Page load event handling
+•	Basic DOM manipulation -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        textarea {
+            width: 400px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Personal Notes Saver</h1>
+    <p>This page demonstrates how to use Local Storage</p>
+    <textarea id="notes" placeholder="Write your notes here..." re></textarea>
+    <br><br>
+    <button onclick="saveNote()">Save</button>
+    <button onclick="clearNote()">Clear</button>
+
+    <script>
+
+        // Save note to localStorage
+        function saveNote() {
+            var noteText = document.getElementById("notes").value;
+            localStorage.setItem("dailyNote", noteText);
+            alert("Note Saved Successfully!");
+        }
+
+        //load the note stored when page loads
+        window.onload = function() {
+            var storedNote = localStorage.getItem("dailyNote");
+            if (storedNote !== null) {
+                document.getElementById("notes").value = storedNote;
+            }
+        };
+        
+
+        // Clear note from localStorage
+        function clearNote() {
+            localStorage.removeItem("dailyNote");
+            document.getElementById("notes").value = "";
+            alert("Note Cleared!");
+        }
+    </script>
+</body>
+</html>

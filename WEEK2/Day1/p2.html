@@ -1,0 +1,170 @@
+<!-- Problem 2: Live Form Validation with Events (Level-1)
+Scenario
+Create a simple registration form that validates user input when fields change.
+📌 Requirements
+•	Fields:
+Name
+Email
+Age
+•	Use:
+onchange
+onclick
+•	Validate:
+Name cannot be empty
+Email must contain "@"
+Age must be greater than 18
+•	Display validation message dynamically.
+•	Store valid user data in sessionStorage.
+🛠️ Technical Constraints
+•	Must use inline onchange events.
+•	Store valid data using:
+sessionStorage.setItem()
+•	No external libraries.
+•	Use basic JavaScript only.
+🎯 Learning Outcome
+You will be able to:
+•	onchange event usage
+•	Form validation logic
+•	Difference between localStorage and sessionStorage
+•	Dynamic DOM updates -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <style>
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+
+        body {
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registration Form</h1>
+     <!-- Name Field -->
+    <label>Name:</label>
+    <input type="text" id="name" onchange="validateName()">
+    <p id="nameMsg" class="error"></p>
+
+    <br>
+    <!-- Email -->
+     <label>Email:</label>
+     <input type="email" id="email" onchange="validateEmail()">
+    <p id="emailMsg" class="error"></p>
+
+    <br>
+
+    <!-- Age Field -->
+    <label>Age:</label>
+    <input type="number" id="age" onchange="validateAge()">
+    <p id="ageMsg" class="error"></p>
+
+    <br>
+
+    <!-- Submit Button -->
+    <button onclick="saveData()">Register</button>
+
+    <p id="finalMsg"></p>
+
+    <script>
+
+    // This function runs when the Name field changes
+    function validateName() {
+
+        // Get the value entered in the name input field
+        var name = document.getElementById("name").value;
+
+        // Check if the name is empty (trim removes extra spaces)
+        if (name.trim() === "") {
+
+            // Display error message if empty
+            document.getElementById("nameMsg").innerHTML = "Name cannot be empty";
+
+        } else {
+
+            // Clear error message if valid
+            document.getElementById("nameMsg").innerHTML = "";
+        }
+    }
+
+
+    // This function runs when the Email field changes
+    function validateEmail() {
+
+        // Get email value
+        var email = document.getElementById("email").value;
+
+        // Check if email contains "@"
+        if (!email.includes("@")) {
+
+            // Show error if "@" is missing
+            document.getElementById("emailMsg").innerHTML = "Email must contain @";
+
+        } else {
+
+            // Clear error message if valid
+            document.getElementById("emailMsg").innerHTML = "";
+        }
+    }
+
+
+    // This function runs when the Age field changes
+    function validateAge() {
+
+        // Get age value
+        var age = document.getElementById("age").value;
+
+        // Check if age is less than or equal to 18 OR empty
+        if (age <= 18 || age === "") {
+
+            // Show error message
+            document.getElementById("ageMsg").innerHTML = "Age must be greater than 18";
+
+        } else {
+
+            // Clear error message if valid
+            document.getElementById("ageMsg").innerHTML = "";
+        }
+    }
+
+
+    // This function runs when Register button is clicked
+    function saveData() {
+
+        // Run all validations when button is clicked
+         validateName();
+         validateEmail();
+         validateAge();
+
+        // Get all input values
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var age = document.getElementById("age").value;
+
+        // Check if all validations are correct
+        if (name.trim() !== "" && email.includes("@") && age > 18) {
+
+            // Store valid data in sessionStorage
+            sessionStorage.setItem("userName", name);
+            sessionStorage.setItem("userEmail", email);
+            sessionStorage.setItem("userAge", age);
+
+            // Show success message
+            alert("Registration Successful!");
+        }
+    }
+
+</script>
+
+</body>
+</html>
