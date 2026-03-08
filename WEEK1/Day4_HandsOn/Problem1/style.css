@@ -1,0 +1,68 @@
+
+/* Default styles (Desktop) */
+body {
+    background-color: lightblue;
+    font-size: 20px;
+    font-family: Arial;
+}
+
+.header {
+    background-color: darkblue;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    background-color:black;
+    padding: 15px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+}
+
+.content {
+    text-align: center;
+    margin-top: 50px;
+}
+
+
+/* Mobile styles */
+@media (max-width: 600px) {
+    body {
+        background-color: lightgreen;   
+        font-size: 15px;
+    }
+
+      .header {
+        font-size: 18px;
+        padding: 15px;
+    }
+
+    .navbar {                            /* Convert navigation to vertical */
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar a {
+        padding: 10px;
+    }
+
+}
+
+
+/* Problem 1 
+Assessment Goal: Ensure learners understand responsiveness and screen adaptability. 
+Hands-on Tasks: 
+Add viewport meta tag to the HTML page 
+Use media queries to: 
+Change background color on mobile screen 
+Adjust font size for smaller screens 
+Convert navigation into vertical layout on mobile 
+Test the page using browser responsive mode 
+Expected Outcome: 
+A webpage that looks different and readable on mobile and desktop screens. */
