@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>College Event Dashboard</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<div class="container-fluid">
+<a class="navbar-brand" href="#">College Events</a>
+<button class="navbar-toggler" type="button"
+data-bs-toggle="collapse"
+data-bs-target="#navMenu">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navMenu">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item"><a class="nav-link active">Dashboard</a></li>
+<li class="nav-item"><a class="nav-link">Events</a></li>
+<li class="nav-item"><a class="nav-link">Students</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<div class="container my-4">
+<div class="row g-4">
+<div class="col-12 col-lg-8">
+<div class="card shadow-sm h-100">
+<div class="card-header d-flex justify-content-between align-items-center">
+<h5 class="mb-0">Upcoming Events</h5>
+<!-- Modal Button -->
+<button class="btn btn-success" data-bs-toggle="modal"data-bs-target="#eventModal">Add Event</button>
+</div>
+<div class="card-body">
+<ul class="list-group">
+<li class="list-group-item">Tech Fest - March 10</li>
+<li class="list-group-item">Cultural Day - March 15</li>
+<li class="list-group-item">Hackathon - March 20</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-6 col-lg-4">
+<div class="card text-center shadow-sm">
+<div class="card-body">
+<h5>Total Events</h5>
+<h2 class="text-primary">12</h2>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-6 col-lg-4">
+<div class="card text-center shadow-sm">
+<div class="card-body">
+<h5>Registered Students</h5>
+<h2 class="text-success">320</h2>
+</div>
+</div>
+</div>
+</div></div>
+<div class="modal fade" id="eventModal" tabindex="-1">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Add New Event</h5>
+            <button type="button" class="btn-close"data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+            <form class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label class="form-label">Event Name</label>
+                    <input type="text" class="form-control" required>
+                    <div class="invalid-feedback">Please enter event name.</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Event Date</label>
+                    <input type="date" class="form-control" required>
+                    <div class="invalid-feedback">Select event date.</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Department</label>
+                    <input type="text" class="form-control" required>
+                    <div class="invalid-feedback">Enter department name.</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-control" required></textarea>
+                    <div class="invalid-feedback">Provide description.</div>
+                </div>
+                <button class="btn btn-primary w-100" type="submit">Save Event</button>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<footer class="bg-dark text-white text-center p-3 mt-4">College Event Dashboard © 2026</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>(() => {
+'use strict'
+const forms = document.querySelectorAll('.needs-validation')
+Array.from(forms).forEach(form => {
+form.addEventListener('submit', event => {
+if (!form.checkValidity()) {
+event.preventDefault()
+event.stopPropagation()
+}
+form.classList.add('was-validated')
+}, false)
+})
+})();
+</script>
+</body>
+</html>
