@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List - Add to Cart</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+        .header {
+            background: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .products {
+            width: 600px;
+            margin: 30px auto;
+        }
+        .product {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        button {
+            padding: 8px 12px;
+            background: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:disabled {
+            background: gray;
+            cursor: not-allowed;
+        }
+
+        .confirmation {
+            margin-left: 10px;
+            color: green;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    Cart Items: <span id="cartCount">0</span>
+</div>
+
+<div class="products" id="productList">
+
+    <div class="product">
+        <h4>Product 1 - Laptop</h4>
+        <button class="addBtn">Add to Cart</button>
+        <span class="confirmation"></span>
+    </div>
+
+    <div class="product">
+        <h4>Product 2 - Mobile</h4>
+        <button class="addBtn">Add to Cart</button>
+        <span class="confirmation"></span>
+    </div>
+
+    <div class="product">
+        <h4>Product 3 - Headphones</h4>
+        <button class="addBtn">Add to Cart</button>
+        <span class="confirmation"></span>
+    </div>
+
+    <div class="product">
+        <h4>Product 4 - Smart Watch</h4>
+        <button class="addBtn">Add to Cart</button>
+        <span class="confirmation"></span>
+    </div>
+
+</div>
+
+<script>
+$(document).ready(function(){
+
+    let count = 0;
+
+    // Event Delegation
+    $("#productList").on("click", ".addBtn", function(){
+
+        // Increase cart counter
+        count++;
+        $("#cartCount").text(count);
+
+        // Disable button
+        $(this).prop("disabled", true);
+
+        // Change button text
+        $(this).text("Added");
+
+        // Add custom attribute
+        $(this).attr("data-added", "true");
+
+        // Show confirmation message beside product
+        $(this).siblings(".confirmation")
+               .text("✔ Added to cart");
+
+    });
+
+});
+</script>
+
+</body>
+</html>
+
+<!-- Problem 3 (Level-2): Product List with Add to Cart Counter
+Scenario:
+An e-commerce website wants to display a list of products. When users click 'Add to Cart', the cart counter at the top should increase dynamically.
+Requirements
+• Display at least 4 products with 'Add to Cart' buttons.
+• Use jQuery to handle button click events.
+• Increase the cart counter dynamically without page refresh.
+• Disable the button once the product is added.
+• Display a small confirmation message beside the product.
+
+️ Technical Constraints
+• Use jQuery event delegation if needed.
+• Use .text(), .attr(), and .prop() methods.
+• No backend or database integration.
+
+Expectations:
+• Efficient event handling.
+• Proper use of jQuery methods for attribute manipulation.
+• Clean UI updates.
+ 
+Learning Outcome
+• Understand advanced DOM manipulation.
+• Use jQuery methods for dynamic content updates. 
+• Apply event delegation concepts.-->

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interactive To-Do List</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+         input {
+            width: 70%;
+            padding: 8px;
+        }
+        button {
+            padding: 8px 10px;
+            cursor: pointer;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            padding: 8px;
+            margin-top: 8px;
+            background: #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 4px;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        .deleteBtn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+        }
+
+        .stats {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>To-Do List</h2>
+
+    <input type="text" id="taskInput" placeholder="Enter a task">
+    <button id="addBtn">Add</button>
+
+    <ul id="taskList"></ul>
+
+    <div class="stats">
+        Total Tasks: <span id="totalCount">0</span> |
+        Completed: <span id="completedCount">0</span>
+    </div>
+</div>
+
+<script>
+$(document).ready(function(){
+
+    let total = 0;
+    let completed = 0;
+
+    // Add Task
+    $("#addBtn").click(function(){
+        let taskText = $("#taskInput").val().trim();
+        if(taskText !== ""){
+            // Create new task item
+            let newTask = `
+                <li>
+                    <span class="taskText">${taskText}</span>
+                    <button class="deleteBtn">Delete</button>
+                </li>
+            `;
+            // Append to list
+            $("#taskList").append(newTask);
+            total++;
+            $("#totalCount").text(total);
+            $("#taskInput").val("");
+        }
+    });
+    // Mark as Complete (Event Delegation)
+    $("#taskList").on("click", ".taskText", function(){
+        $(this).toggleClass("completed");
+        if($(this).hasClass("completed")){
+            completed++;
+        } else {
+            completed--;
+        }
+        $("#completedCount").text(completed);
+    });
+    // Delete Task (Event Delegation)
+    $("#taskList").on("click", ".deleteBtn", function(){
+        let isCompleted = $(this).siblings(".taskText").hasClass("completed");
+        if(isCompleted){
+            completed--;
+            $("#completedCount").text(completed);
+        }
+        total--;
+        $("#totalCount").text(total);
+        $(this).parent().remove();
+    });
+
+});
+</script>
+</body>
+</html>
+
+<!-- Problem 4 (Level-2): Interactive To-Do List Application
+Scenario:
+A productivity web app requires a dynamic To-Do List where users can add, mark as complete, and remove tasks using jQuery.
+
+Requirements
+• Provide an input field and Add button to insert tasks.
+• Display tasks dynamically in a list.
+• Allow users to mark tasks as completed (strike-through effect).
+• Provide a delete button for each task.
+• Display total task count and completed task count dynamically.
+
+️ Technical Constraints
+• Use jQuery for all DOM manipulation and event handling.
+• Use append(), remove(), toggleClass(), and on() methods.
+• No external libraries except jQuery.
+ 
+Expectations:
+• Proper dynamic element handling.
+• Efficient event binding for dynamically created elements.
+• Responsive and interactive UI behavior.
+
+Learning Outcome
+• Master jQuery DOM manipulation.
+• Implement dynamic event handling.
+• Build a small interactive application using jQuery. -->
