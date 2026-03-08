@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Theme Toggle App</title>
+<style>
+   /* Default Light Theme (Base)*/
+   body {
+        margin: 0;
+        padding: 40px;
+        font-family: Arial, sans-serif;
+        background-color: #ffffff;
+        color: #000000;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .dark-mode {
+        background-color: #1e1e1e;
+        color: #ffffff;
+    }
+/* Button Styling */
+    button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    .toggle-btn {
+        background-color: #333;
+        color: white;
+    }
+
+    .dark-mode .toggle-btn {
+        background-color: #ddd;
+        color: black;
+    }
+</style>
+</head>
+
+<body>
+<h1>My Website</h1>
+<p> Click the button to switch themes.</p>
+<button id="themeToggle" class="toggle-btn">Switch to Dark Mode</button>
+<script>
+//   DOM Selection
+const toggleBtn = document.getElementById("themeToggle");
+// Apply Saved Theme On Load
+function loadTheme() {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+        toggleBtn.textContent = "Switch to Light Mode";
+    }
+}
+//   Function: Toggle Theme
+function toggleTheme() {
+    // Toggle dark-mode class on body
+    document.body.classList.toggle("dark-mode");
+    // Check if dark mode is active
+    const isDark = document.body.classList.contains("dark-mode");
+    if (isDark) {
+        localStorage.setItem("theme", "dark");
+        toggleBtn.textContent = "Switch to Light Mode";
+    } else {
+        localStorage.setItem("theme", "light");
+        toggleBtn.textContent = "Switch to Dark Mode";
+    }
+}
+toggleBtn.addEventListener("click", toggleTheme);
+// Load Saved Theme When Page Opens
+window.addEventListener("load", loadTheme);
+</script>
+</body>
+</html>
