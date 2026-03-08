@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Profile Manager</title>
+    <style>
+        #profileBox {
+            border: 2px solid black;
+            padding: 15px;
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Student Profile</h2>
+
+<div id="profileBox"></div>
+
+<br>
+
+<input type="number" id="newMarks" placeholder="Enter New Marks">
+<button onclick="updateMarksFromInput()">Update Marks</button>
+
+<script>
+
+    // Global student object
+    var student = {
+        name: "Anjali",
+        rollNo: 46,
+        marks: 85
+    };
+
+    // Function to display student profile
+    function updateStudentProfile(studentObj) {
+        var output =
+            "Name: " + studentObj.name + "<br>" +
+            "Roll No: " + studentObj.rollNo + "<br>" +
+            "Marks: " + studentObj.marks;
+
+        document.getElementById("profileBox").innerHTML = output;
+    }
+    // Function to update marks
+    function updateMarks(newMarks) {
+// Update object property
+        student.marks = newMarks;
+        // Refresh display
+        updateStudentProfile(student);
+    }
+// Get input value and call updateMarks
+    function updateMarksFromInput() {
+
+        var marksValue = document.getElementById("newMarks").value;
+
+        updateMarks(marksValue);
+    }
+// Initial display on page load
+    updateStudentProfile(student);
+
+</script>
+
+</body>
+</html>
